@@ -1,0 +1,36 @@
+@import-normalize;
+@import "./mixins";
+
+html {
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  @include font-helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  color: $main-text-color;
+  margin: 0;
+}
+
+.container {
+  max-width: 1400px;
+  padding: 0 140px;
+  margin: 0 auto;
+}
+
+a {
+  color: #8ea7ff;
+  outline: $outline-color;
+  &:focus {
+    outline-color: #a6c7ff;
+    outline-style: auto;
+  }
+}

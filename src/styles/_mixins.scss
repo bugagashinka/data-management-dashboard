@@ -1,0 +1,40 @@
+//  Global mixins styles
+
+@mixin font-helvetica {
+  font-family: "HelveticaNeue", Arial, sans-serif;
+}
+
+@mixin background-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin reset-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@mixin vertical-list($left-margin, $text-color) {
+  @include reset-list;
+
+  li {
+    display: inline-block;
+
+    & + li {
+      margin-left: $left-margin;
+    }
+    a {
+      color: $text-color;
+    }
+  }
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
