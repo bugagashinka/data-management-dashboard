@@ -1,0 +1,16 @@
+<svg id="Bigger_icon" data-name="Bigger icon" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #ea5a5a;
+        stroke-width: 1px;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="0.5" y="0.5" width="20" height="20"/>
+  <rect class="cls-1" x="11.5" y="11.5" width="6" height="6"/>
+  <rect class="cls-1" x="3.5" y="11.5" width="6" height="6"/>
+  <rect class="cls-1" x="11.5" y="3.5" width="6" height="6"/>
+  <rect class="cls-1" x="3.5" y="3.5" width="6" height="6"/>
+</svg>
