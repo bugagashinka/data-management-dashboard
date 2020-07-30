@@ -22,15 +22,11 @@ body {
 
 .container {
   max-width: 1400px;
-  padding: 0 140px;
   margin: 0 auto;
 }
 
 a {
-  color: #8ea7ff;
+  color: #a3a2a8;
   outline: $outline-color;
-  &:focus {
-    outline-color: #a6c7ff;
-    outline-style: auto;
-  }
+  text-decoration: none;
 }
