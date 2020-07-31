@@ -6,6 +6,11 @@
   padding-right: 15px;
   background: $content-background;
 }
+@media screen and (max-width: 600px) {
+  .app__inner {
+    max-height: initial;
+  }
+}
 .title {
   margin: 0;
 }
@@ -23,6 +28,20 @@
   margin-bottom: 20px;
   margin-left: 20px;
 }
+
+@media screen and (max-width: 768) {
+  .panel {
+    display: none;
+    position: fixed;
+    z-index: 1;
+  }
+}
+@media screen and (max-width: 600px) {
+  .panel {
+    display: none;
+  }
+}
+
 // Profile component
 .profile {
   margin: 30px 0;
@@ -212,6 +231,11 @@
     }
   }
 }
+@media screen and (max-width: 600px) {
+  .thumb-size {
+    display: none;
+  }
+}
 
 // Content component style
 .content {
@@ -249,6 +273,14 @@
     }
   }
 }
+@media screen and (max-width: 992px) {
+  .content {
+    &::-webkit-scrollbar,
+    &:hover::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
 
 .album {
   margin-bottom: 50px;
@@ -263,13 +295,14 @@
     @include reset-list;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -10px;
+    margin: 0 -#{$thumb-margin};
+  }
+  &__thumb {
+    width: initial;
+    margin: 0 $thumb-margin 40px;
   }
   &__thumb-content {
     position: relative;
-    width: 260px;
-    height: 180px;
-    margin: 0 10px 40px;
     border-radius: 5px;
     background-color: #fff;
     transition: all 0.5s;
@@ -304,7 +337,87 @@
     transition: all 0.5s;
   }
   &__thumb-date {
-    display: inline-block;
-    margin-top: 8px;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
   }
+}
+
+@media screen and (max-width: 1400px) {
+  .album {
+    &__thumb {
+      width: calc(100% / 4 - 2 * #{$thumb-margin});
+    }
+  }
+}
+@media screen and (max-width: 992px) {
+  .album {
+    &__thumb {
+      width: calc(100% / 3 - 2 * #{$thumb-margin});
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .album {
+    &__thumb {
+      width: calc(100% / 2 - 2 * #{$thumb-margin});
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .album {
+    &__thumb-content {
+      width: initial;
+      height: initial;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .album {
+    margin-bottom: initial;
+
+    &__thumb {
+      width: 100%;
+    }
+
+    &__thumb-content {
+      width: 100%;
+      height: auto;
+    }
+
+    &-title {
+      display: block;
+      margin-bottom: initial;
+    }
+    &__header {
+      margin-bottom: 16px;
+    }
+  }
+}
+@media screen and (min-width: 1400px) {
+  .album {
+    &__thumb-content {
+      width: 260px;
+      height: 180px;
+    }
+  }
+}
+
+.thumb-col-1 {
+  width: calc(100% / 1 - 2 * #{$thumb-margin});
+}
+.thumb-col-2 {
+  width: calc(100% / 2 - 2 * #{$thumb-margin});
+}
+.thumb-col-3 {
+  width: calc(100% / 3 - 2 * #{$thumb-margin});
+}
+.thumb-col-4 {
+  width: calc(100% / 4 - 2 * #{$thumb-margin});
+}
+.thumb-col-5 {
+  width: calc(100% / 5 - 2 * #{$thumb-margin});
 }
