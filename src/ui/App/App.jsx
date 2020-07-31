@@ -1,7 +1,6 @@
 import React from "react";
 import aspen from "assets/images/aspen.jpg";
 import karpaty from "assets/images/karpaty.jpg";
-import "./App.scss";
 
 function App() {
   return (
