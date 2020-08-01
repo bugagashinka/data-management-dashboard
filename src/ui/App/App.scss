@@ -1,44 +1,139 @@
-// App component styles
-.app__inner {
-  display: flex;
-  max-height: 900px;
-  overflow-y: hidden;
-  padding-right: 15px;
-  background: $content-background;
+// General styles
+
+.input {
+  outline: none;
 }
+
+.button {
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: transparent;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+
+  &:focus,
+  &:active {
+    border-color: #fff;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// App component styles
+.app {
+  &__inner {
+    display: flex;
+    max-height: 900px;
+    overflow-y: hidden;
+    padding-right: 15px;
+    background: $content-background;
+  }
+  &__menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    z-index: 2;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .app__inner {
     max-height: initial;
   }
 }
+
 .title {
   margin: 0;
+}
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: red;
+  z-index: 2;
 }
 // Panel component styles
 .panel {
   position: relative;
   min-width: 220px;
+  max-width: 220px;
+  width: 100%;
   background-color: $panel-background;
-}
-.panel-title {
-  display: inline-block;
-  color: $panel-title-color;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
+  overflow: hidden;
+  transition: all 0.8s, opacity 0.3s;
 
-@media screen and (max-width: 768) {
-  .panel {
-    display: none;
-    position: fixed;
-    z-index: 1;
+  &-title {
+    display: inline-block;
+    color: $panel-title-color;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 20px;
   }
 }
-@media screen and (max-width: 600px) {
+
+.menu-btn:active + .panel,
+.menu-btn_active + .panel {
+  width: 100%;
+  min-width: 220px;
+  visibility: initial;
+  opacity: 1;
+}
+
+.menu-btn {
+  display: none;
+  border-radius: 5px;
+  padding: 7px 5px;
+  cursor: pointer;
+
+  &__row1,
+  &__row2,
+  &__row3 {
+    float: left;
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    background-color: #000;
+    margin: 2px auto;
+    transition: transform 0.3s;
+  }
+
+  &_active {
+    .menu-btn__row1 {
+      transform: rotate(45deg) translate(6px, 5px);
+    }
+    .menu-btn__row3 {
+      transform: rotate(-45deg) translate(6px, -5px);
+    }
+    .menu-btn__row2 {
+      opacity: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
   .panel {
-    display: none;
+    z-index: 1;
+    width: 0;
+    visibility: hidden;
+    min-width: 0;
+    opacity: 0;
+  }
+  .menu-btn {
+    display: block;
+    visibility: visible;
+  }
+}
+@media screen and (max-width: 768px) {
+  .panel {
+    position: fixed;
   }
 }
 
@@ -92,29 +187,6 @@
     font-size: 16px;
     background: none;
     caret-color: #fff;
-  }
-}
-
-// General styles
-
-.input {
-  outline: none;
-}
-
-.button {
-  outline: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  background-color: transparent;
-  opacity: 0.85;
-  transition: opacity 0.2s;
-
-  &:focus,
-  &:active {
-    border-color: #fff;
-  }
-  &:hover {
-    opacity: 1;
   }
 }
 
@@ -248,13 +320,13 @@
   margin-top: 30px;
 
   &::-webkit-scrollbar {
+    width: 5px;
     visibility: hidden;
   }
 
   &:hover {
     &::-webkit-scrollbar {
       display: block;
-      width: 5px;
       border-radius: 5px;
     }
 
@@ -284,9 +356,11 @@
 
 .album {
   margin-bottom: 50px;
+  &__header {
+    margin-bottom: 25px;
+  }
   &-title {
     display: inline-block;
-    margin-bottom: 25px;
     margin-right: 22px;
     color: $album-title-color;
     font-size: 22px;
@@ -311,6 +385,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px;
   }
 
   &__thumb-link:focus,
@@ -370,7 +445,7 @@
   .album {
     &__thumb-content {
       width: initial;
-      height: initial;
+      height: 100%;
     }
   }
 }

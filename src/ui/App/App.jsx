@@ -7,6 +7,12 @@ function App() {
     <main className="app">
       <div className="container">
         <div className="app__inner">
+          <button className="button app__menu-btn menu-btn">
+            <div className="menu-btn__row1"></div>
+            <div className="menu-btn__row2"></div>
+            <div className="menu-btn__row3"></div>
+          </button>
+
           <aside className="panel">
             <section className="profile">
               <div className="profile__avatar">
