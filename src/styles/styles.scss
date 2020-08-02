@@ -3,6 +3,14 @@
 @import "./settings/vars";
 @import "./settings/mixins";
 @import "./global/base";
+@import "./global/controls";
 
 // Components styles
 @import "./ui/app";
+@import "./ui/menu-btn";
+@import "./ui/panel";
+@import "./ui/profile";
+@import "./ui/filter";
+@import "./ui/slider-input";
+@import "./ui/main-content";
+@import "./ui/thumb";
