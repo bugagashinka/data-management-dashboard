@@ -1,0 +1,80 @@
+// Filter section
+.search {
+  margin-bottom: 35px;
+  padding: 16px 0;
+  border-style: solid;
+  border-width: 1px 0;
+  color: $album-title-color;
+  $panel-background: #1e1d26;
+
+  &-form__input {
+    color: #747474;
+    padding: 6px 12px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    background: none;
+    caret-color: #fff;
+  }
+}
+
+.bigger-btn,
+.smaller-btn {
+  width: 22px;
+  height: 22px;
+  @include background-image;
+}
+.smaller-btn {
+  background-image: url(../../assets/icon/smaller-icon.svg);
+}
+.bigger-btn {
+  background-image: url(../../assets/icon/bigger-icon.svg);
+}
+
+.upload-btn {
+  display: block;
+  margin: 0 auto;
+  width: 160px;
+  padding: 8px 16px;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 15px;
+  background-color: $button-color;
+  text-transform: uppercase;
+}
+.albums__add-btn {
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  @include background-image;
+  background-image: url(../../assets/icon/add-icon.svg);
+  border-color: transparent;
+}
+
+// Panel categories styles
+.albums__header {
+  position: relative;
+}
+.filter {
+  &__item {
+    margin-bottom: 40px;
+  }
+
+  &__list {
+    @include reset-list;
+  }
+  &__list-link {
+    display: block;
+    padding: 10px 5px 10px 35px;
+    border-left: 3px solid transparent;
+
+    &:focus,
+    &:active {
+      border-left-color: #ea5a5a;
+      background-color: #19181e;
+      color: #fff;
+    }
+  }
+}
