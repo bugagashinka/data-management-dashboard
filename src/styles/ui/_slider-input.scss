@@ -1,0 +1,57 @@
+// Panel thumb size controll
+.thumb-size {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+
+  &__inner {
+    display: flex;
+    justify-content: space-around;
+  }
+  &__slider {
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    &:focus,
+    &:active {
+      border-color: #fff;
+    }
+  }
+  &__slider-input {
+    width: 100px;
+  }
+  &__slider-input {
+    appearance: none;
+    height: 3px;
+    border-radius: 5px;
+    background-color: #111;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $button-color;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $button-color;
+      cursor: pointer;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .thumb-size {
+    display: none;
+  }
+}
