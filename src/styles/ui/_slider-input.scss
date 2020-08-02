@@ -1,8 +1,7 @@
 // Panel thumb size controll
 .thumb-size {
-  position: absolute;
   width: 100%;
-  bottom: 20px;
+  margin: 20px 0;
 
   &__inner {
     display: flex;
