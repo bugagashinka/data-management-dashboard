@@ -1,0 +1,34 @@
+// Panel component styles
+.panel {
+  position: relative;
+  min-width: 220px;
+  max-width: 220px;
+  width: 100%;
+  background-color: $panel-background;
+  overflow: hidden;
+  transition: all 0.8s, opacity 0.3s;
+
+  &-title {
+    display: inline-block;
+    color: $panel-title-color;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .panel {
+    z-index: 1;
+    width: 0;
+    visibility: hidden;
+    min-width: 0;
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .panel {
+    position: fixed;
+    height: 100%;
+  }
+}
