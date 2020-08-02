@@ -5,32 +5,7 @@
   overflow-y: scroll;
   margin-top: 30px;
   background: $content-background;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-    visibility: hidden;
-  }
-
-  &:hover {
-    &::-webkit-scrollbar {
-      display: block;
-      border-radius: 5px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 5px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #b7b7b7;
-      border-radius: 5px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: rgba($main-text-color, 0.6);
-    }
-  }
+  @include scrollbar;
 }
 @media screen and (max-width: 992px) {
   .content {
