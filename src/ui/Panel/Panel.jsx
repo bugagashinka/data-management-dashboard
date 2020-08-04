@@ -6,9 +6,11 @@ import SliderInput from "ui/SliderInput";
 const Panel = (props) => {
   return (
     <aside className="panel">
-      <Profile />
-      <Filter />
-      <SliderInput />
+      <div className="panel__inner">
+        <Profile />
+        <Filter />
+        <SliderInput />
+      </div>
     </aside>
   );
 };

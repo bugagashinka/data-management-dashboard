@@ -6,8 +6,13 @@
   width: 100%;
   background-color: $panel-background;
   overflow: hidden;
-  transition: all 0.8s, opacity 0.3s;
+  transition: all 0.4s, opacity 0.8s;
   overflow-y: auto;
+
+  &__inner {
+    opacity: 1;
+    transition: opacity 0.1s;
+  }
 
   &-title {
     display: inline-block;
@@ -27,13 +32,27 @@
     width: 0px;
   }
 }
+
 @media screen and (max-width: 992px) {
   .panel {
     z-index: 1;
     width: 0;
     visibility: hidden;
     min-width: 0;
-    opacity: 0;
+
+    &__inner {
+      opacity: 0;
+    }
+  }
+  .menu-btn:active + .panel,
+  .menu-btn_active + .panel {
+    width: 100%;
+    min-width: 220px;
+    visibility: initial;
+
+    .panel__inner {
+      opacity: 1;
+    }
   }
 }
 @media screen and (max-width: 768px) {
