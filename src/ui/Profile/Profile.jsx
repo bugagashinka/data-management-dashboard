@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { uploadFiles } from "services/FirestoreService";
 
 const Profile = (props) => {
+  const [fileList, updateFileList] = useState([]);
+
+  const uploadHandler = ({ target }) => {
+    const files = Object.values(target.files);
+    console.log(files);
+    updateFileList(files);
+  };
+
+  const syncHandler = (e) => {
+    const uploadTask = uploadFiles(
+      "photos",
+      fileList,
+      (snapshot) => {
+        console.log("Progress: ", snapshot);
+      },
+      (result) => {
+        console.log("Complete: ", result);
+      }
+    );
+  };
+
   return (
     <section className="profile">
       <div className="profile__avatar">
@@ -8,9 +30,11 @@ const Profile = (props) => {
       </div>
       <div className="h3 profile__name">Amelia Rice</div>
       <span className="profile__stats">2390 files</span>
-      <button className="button upload-btn" type="button">
+      <label className="button upload-btn" htmlFor="upload-btn">
         Upload
-      </button>
+      </label>
+      <input id="upload-btn" onChange={uploadHandler} type="file" accept="audio/*,video/*,image/*" multiple />
+      <button className="button sync-btn" onClick={syncHandler}></button>
     </section>
   );
 };

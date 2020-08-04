@@ -30,3 +30,41 @@
     margin-bottom: 20px;
   }
 }
+
+#upload-btn {
+  display: none;
+}
+
+.upload-btn {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 160px;
+  padding: 8px 16px;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 15px;
+  background-color: $button-color;
+  text-transform: uppercase;
+}
+@keyframes sync {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-180deg);
+  }
+}
+.sync-btn {
+  width: 40px;
+  height: 40px;
+  @include background-image;
+  transition: opacity 0.2s;
+  background-image: url(../../assets/icon/cloud-sync.svg);
+
+  &.active,
+  &:active {
+    animation: sync 1.5s infinite;
+    border-color: transparent;
+  }
+}
