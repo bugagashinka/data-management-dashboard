@@ -2,7 +2,7 @@
 .app {
   &__inner {
     display: flex;
-    max-height: 900px;
+    height: 100vh;
     overflow-y: hidden;
     padding-right: 15px;
     background: $content-background;
