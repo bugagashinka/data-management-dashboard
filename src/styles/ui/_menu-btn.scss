@@ -7,13 +7,6 @@
   border: none;
   z-index: 2;
 }
-.menu-btn:active + .panel,
-.menu-btn_active + .panel {
-  width: 100%;
-  min-width: 220px;
-  visibility: initial;
-  opacity: 1;
-}
 
 .menu-btn {
   display: none;
