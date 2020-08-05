@@ -1,27 +1,27 @@
 import React, { useState } from "react";
-import { uploadFiles } from "services/FirestoreService";
+import { connect } from "react-redux";
+import { syncWithStorage, checkUploadPermission } from "business-logic";
+import ModalWindowPortal from "ui/ModalWindow";
 
-const Profile = (props) => {
+const Profile = ({ currAlbum }) => {
+  const [showModal, toggleModal] = useState(false);
   const [fileList, updateFileList] = useState([]);
 
-  const uploadHandler = ({ target }) => {
+  const closeModalWindow = () => toggleModal(!showModal);
+
+  const uploadClickHandler = (e) => {
+    if (!checkUploadPermission(currAlbum)) {
+      toggleModal(true);
+      e.preventDefault();
+    }
+  };
+  const uploadChangeHandler = ({ target }) => {
     const files = Object.values(target.files);
     console.log(files);
     updateFileList(files);
   };
 
-  const syncHandler = (e) => {
-    const uploadTask = uploadFiles(
-      "photos",
-      fileList,
-      (snapshot) => {
-        console.log("Progress: ", snapshot);
-      },
-      (result) => {
-        console.log("Complete: ", result);
-      }
-    );
-  };
+  const syncHandler = (e) => syncWithStorage(fileList);
 
   return (
     <section className="profile">
@@ -33,10 +33,25 @@ const Profile = (props) => {
       <label className="button upload-btn" htmlFor="upload-btn">
         Upload
       </label>
-      <input id="upload-btn" onChange={uploadHandler} type="file" accept="audio/*,video/*,image/*" multiple />
-      <button className="button sync-btn" onClick={syncHandler}></button>
+      <input
+        id="upload-btn"
+        onClick={uploadClickHandler}
+        onChange={uploadChangeHandler}
+        type="file"
+        accept="audio/*,video/*,image/*"
+        multiple
+      />
+      <ModalWindowPortal isVisible={showModal} onClose={closeModalWindow}>
+        <p>Please select album or create new</p>
+      </ModalWindowPortal>
+
+      <button className="button sync-btn" onClick={syncHandler} type="button"></button>
     </section>
   );
 };
 
-export default Profile;
+const stateToProps = ({ currAlbum }) => ({
+  currAlbum,
+});
+
+export default connect(stateToProps, { syncWithStorage })(Profile);

@@ -1,4 +1,5 @@
 import categories from "./categoriesEnum";
+import { uploadFiles } from "services/FirestoreService";
 
 const SET_CATEGORY = "reducers/SET_CATEGORY";
 const SET_ALBUM = "reducers/SET_ALBUM";
@@ -9,6 +10,8 @@ const DEFAULT_ALBUM_NAME = "All";
 const initialState = {
   categories: [PHOTOS_CATEGORY, VIDEOS_CATEGORY, AUDIOS_CATEGORY],
   currCategory: PHOTOS_CATEGORY,
+  currAlbum: DEFAULT_ALBUM_NAME,
+  currentTask: null,
   albums: {
     [PHOTOS_CATEGORY]: [
       {
@@ -67,18 +70,7 @@ const initialState = {
       },
     ],
   },
-  currAlbum: DEFAULT_ALBUM_NAME,
   searchQuery: "",
-};
-
-const stateReducer = (state = initialState, action) => {
-  return {
-    categories: state.categories,
-    currCategory: currCategory(state.currCategory, action),
-    albums: state.albums,
-    currAlbum: currAlbum(state.currAlbum, action),
-    searchQuery: state.searchQuery,
-  };
 };
 
 const currCategory = (state, action) => {
@@ -99,6 +91,17 @@ const currAlbum = (state, action) => {
   }
 };
 
+const stateReducer = (state = initialState, action) => {
+  return {
+    categories: state.categories,
+    currCategory: currCategory(state.currCategory, action),
+    currAlbum: currAlbum(state.currAlbum, action),
+    currentTask: state.currentTask,
+    albums: state.albums,
+    searchQuery: state.searchQuery,
+  };
+};
+
 const selectCategory = (categoryName) => ({
   type: SET_CATEGORY,
   value: categoryName,
@@ -109,4 +112,23 @@ const selectAlbum = (albumName) => ({
   value: albumName,
 });
 
-export { stateReducer as default, selectCategory };
+const syncWithStorage = (files) => (dispatch) => {
+  if (!files.length) return;
+
+  const uploadTask = uploadFiles(
+    "photos",
+    files,
+    (snapshot) => {
+      console.log("Progress: ", snapshot);
+    },
+    (result) => {
+      console.log("Complete: ", result);
+    }
+  );
+};
+
+const checkUploadPermission = (currAlbum) => {
+  return currAlbum !== DEFAULT_ALBUM_NAME;
+};
+
+export { stateReducer as default, selectCategory, selectAlbum, syncWithStorage, checkUploadPermission };
