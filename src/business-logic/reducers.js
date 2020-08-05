@@ -3,6 +3,7 @@ import { uploadFiles } from "services/FirestoreService";
 
 const SET_CATEGORY = "reducers/SET_CATEGORY";
 const SET_ALBUM = "reducers/SET_ALBUM";
+const ADD_ALBUM = "reducers/ADD_ALBUM";
 
 const { PHOTOS_CATEGORY, VIDEOS_CATEGORY, AUDIOS_CATEGORY } = categories;
 const DEFAULT_ALBUM_NAME = "All";
@@ -91,13 +92,35 @@ const currAlbum = (state, action) => {
   }
 };
 
+const albums = (state, action) => {
+  switch (action.type) {
+    case ADD_ALBUM:
+      const dateSuffix = state.albums[state.currCategory].find((album) => album.name === action.value)
+        ? `-${new Date().toLocaleDateString()}-${new Date().toLocaleTimeString()}`
+        : "";
+      const newState = [...state.albums[state.currCategory]];
+      newState.splice(1, 0, {
+        name: `${action.value}${dateSuffix}`,
+        type: state.currCategory,
+        urlList: Array(0),
+      });
+
+      return {
+        ...action.albums,
+        [state.currCategory]: newState,
+      };
+    default:
+      return state.albums;
+  }
+};
+
 const stateReducer = (state = initialState, action) => {
   return {
     categories: state.categories,
     currCategory: currCategory(state.currCategory, action),
     currAlbum: currAlbum(state.currAlbum, action),
     currentTask: state.currentTask,
-    albums: state.albums,
+    albums: albums(state, action),
     searchQuery: state.searchQuery,
   };
 };
@@ -109,6 +132,11 @@ const selectCategory = (categoryName) => ({
 
 const selectAlbum = (albumName) => ({
   type: SET_ALBUM,
+  value: albumName,
+});
+
+const addAlbum = (albumName) => ({
+  type: ADD_ALBUM,
   value: albumName,
 });
 
@@ -131,4 +159,9 @@ const checkUploadPermission = (currAlbum) => {
   return currAlbum !== DEFAULT_ALBUM_NAME;
 };
 
-export { stateReducer as default, selectCategory, selectAlbum, syncWithStorage, checkUploadPermission };
+const addNewAlbum = (albumName) => (dispatch) => {
+  dispatch(addAlbum(albumName));
+  dispatch(selectAlbum(albumName));
+};
+
+export { stateReducer as default, selectCategory, selectAlbum, addNewAlbum, syncWithStorage, checkUploadPermission };

@@ -6,12 +6,14 @@
   border: 1px solid transparent;
   cursor: pointer;
   background-color: transparent;
-  opacity: 0.85;
+  opacity: 0.75;
   transition: opacity 0.2s;
 
-  &:focus,
-  &:active {
+  &:focus {
     border-color: #fff;
+  }
+  &:active {
+    border-color: initial;
   }
   &:hover {
     opacity: 1;

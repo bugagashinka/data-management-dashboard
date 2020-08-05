@@ -68,3 +68,48 @@
     }
   }
 }
+.albums-input {
+  width: 100%;
+  appearance: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+.albums-names__input {
+  margin-bottom: 25px;
+  padding-right: 45px;
+}
+.albums-names__create {
+  position: relative;
+  visibility: hidden;
+  height: 0;
+  min-height: 0;
+
+  &_visible {
+    visibility: visible;
+    height: initial;
+    min-height: initial;
+  }
+  .active {
+    border: none;
+  }
+}
+.albums-names__controls {
+  position: absolute;
+  line-height: 36px;
+  top: 0;
+  right: 0;
+}
+.albums__accept-btn,
+.albums__cancel-btn {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  @include background-image;
+  border: 1px solid transparent;
+}
+.albums__accept-btn {
+  background-image: url(../../assets/icon/ok-icon.svg);
+}
+.albums__cancel-btn {
+  background-image: url(../../assets/icon/cancel-icon.svg);
+}
