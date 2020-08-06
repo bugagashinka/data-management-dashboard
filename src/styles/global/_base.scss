@@ -34,19 +34,3 @@ a {
 .title {
   margin: 0;
 }
-
-.thumb-col-1 {
-  width: calc(100% / 1 - 2 * #{$thumb-margin});
-}
-.thumb-col-2 {
-  width: calc(100% / 2 - 2 * #{$thumb-margin});
-}
-.thumb-col-3 {
-  width: calc(100% / 3 - 2 * #{$thumb-margin});
-}
-.thumb-col-4 {
-  width: calc(100% / 4 - 2 * #{$thumb-margin});
-}
-.thumb-col-5 {
-  width: calc(100% / 5 - 2 * #{$thumb-margin});
-}

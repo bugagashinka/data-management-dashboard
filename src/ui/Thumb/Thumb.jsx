@@ -1,9 +1,9 @@
 import React from "react";
 import aspen from "assets/images/aspen.jpg";
 
-const Thumb = (props) => {
+const Thumb = ({ className }) => {
   return (
-    <li className="album__thumb">
+    <li className={`album__thumb ${className}`}>
       <a href="#" className="album__thumb-link">
         <div className="album__thumb-content">
           <img className="album__thumb-img" src={aspen} alt="" />
