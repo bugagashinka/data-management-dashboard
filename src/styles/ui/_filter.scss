@@ -68,6 +68,9 @@
     }
   }
 }
+.albums-names__item {
+  position: relative;
+}
 .albums-input {
   width: 100%;
   appearance: none;
@@ -75,19 +78,20 @@
   border: 1px solid transparent;
 }
 .albums-names__input {
-  margin-bottom: 25px;
   padding-right: 45px;
+  padding-left: 10px;
+  margin-bottom: 25px;
 }
 .albums-names__create {
   position: relative;
   visibility: hidden;
+
   height: 0;
-  min-height: 0;
+  transition: all 0.3s;
 
   &_visible {
     visibility: visible;
-    height: initial;
-    min-height: initial;
+    height: 61px;
   }
   .active {
     border: none;
@@ -99,6 +103,7 @@
   top: 0;
   right: 0;
 }
+.albums__edit-btn,
 .albums__accept-btn,
 .albums__cancel-btn {
   width: 14px;
@@ -112,4 +117,17 @@
 }
 .albums__cancel-btn {
   background-image: url(../../assets/icon/cancel-icon.svg);
+}
+
+.albums__edit-btn {
+  position: absolute;
+  right: 6px;
+  top: 10px;
+  visibility: hidden;
+  background-image: url(../../assets/icon/edit-icon.svg);
+}
+.albums-names__item + .albums-names__item {
+  .active + .albums__edit-btn {
+    visibility: visible;
+  }
 }

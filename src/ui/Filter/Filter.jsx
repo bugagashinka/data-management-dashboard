@@ -1,14 +1,31 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
-import { selectCategory, selectAlbum, addNewAlbum } from "business-logic/reducers";
+import { selectCategory, selectAlbum, addNewAlbum, editAlbumName } from "business-logic/reducers";
 
 const LIST_ITEM_LIMIT = 18;
+const inputModeEnum = {
+  CREATE_MODE: "create",
+  EDIT_MODE: "edit",
+};
 
 const Filter = (props) => {
-  const [createAlbumValue, setAlbumValue] = useState("");
-  const [showCreateAlbum, toggleCreateAlbum] = useState(false);
-  const { categories, currCategory, currAlbum, albums, selectCategory, selectAlbum, addNewAlbum } = props;
+  const [inputModeState, setInputModeState] = useState({
+    mode: inputModeEnum.CREATE_MODE,
+    initialValue: "",
+  });
+  const [albumInputValue, setAlbumValue] = useState("");
+  const [showAlbumInput, toggleAlbumInput] = useState(false);
+  const {
+    categories,
+    currCategory,
+    currAlbum,
+    albums,
+    selectCategory,
+    selectAlbum,
+    addNewAlbum,
+    editAlbumName,
+  } = props;
 
   const selectCategoryHandler = (category) => (e) => {
     e.preventDefault();
@@ -21,23 +38,34 @@ const Filter = (props) => {
   };
 
   const addHandler = () => {
+    setInputModeState((prevState) => ({ ...prevState, mode: inputModeEnum.CREATE_MODE }));
     setAlbumValue("");
-    toggleCreateAlbum(!showCreateAlbum);
+    toggleAlbumInput(!showAlbumInput);
   };
 
   const acceptHandler = () => {
-    if (createAlbumValue) {
-      addNewAlbum(createAlbumValue);
-      toggleCreateAlbum(!showCreateAlbum);
+    if (!albumInputValue) return;
+
+    if (inputModeState.mode === inputModeEnum.EDIT_MODE) {
+      editAlbumName(inputModeState.initialValue, albumInputValue);
+    } else {
+      addNewAlbum(albumInputValue);
     }
+    toggleAlbumInput(!showAlbumInput);
   };
 
   const cancelHandler = () => {
-    toggleCreateAlbum(!showCreateAlbum);
+    toggleAlbumInput(!showAlbumInput);
   };
 
   const changeHandler = ({ target }) => {
     setAlbumValue(target.value);
+  };
+
+  const editHandler = (albumName) => (e) => {
+    setInputModeState({ initialValue: albumName, mode: inputModeEnum.EDIT_MODE });
+    setAlbumValue(albumName);
+    toggleAlbumInput(true);
   };
 
   const categoryItems = categories.map((category) => {
@@ -59,6 +87,7 @@ const Filter = (props) => {
         <a href="#" className={albumItemStyle} onClick={selectAlbumHandler(albumName)}>
           {displayedName}
         </a>
+        <button onClick={editHandler(albumName)} className="button albums__edit-btn" type="button"></button>
       </li>
     );
   });
@@ -82,11 +111,11 @@ const Filter = (props) => {
         <ul className="albums-names filter__list">
           <li
             key="album-create"
-            className={classNames("albums-names__create", { "albums-names__create_visible": showCreateAlbum })}
+            className={classNames("albums-names__create", { "albums-names__create_visible": showAlbumInput })}
           >
             <input
               onChange={changeHandler}
-              value={createAlbumValue}
+              value={albumInputValue}
               className="albums-input albums-names__input filter__list-link active"
             ></input>
             <div className="albums-names__controls">
@@ -108,4 +137,4 @@ const stateToProps = (state) => ({
   albums: state.albums[state.currCategory].map((album) => album.name),
 });
 
-export default connect(stateToProps, { selectCategory, selectAlbum, addNewAlbum })(Filter);
+export default connect(stateToProps, { selectCategory, selectAlbum, addNewAlbum, editAlbumName })(Filter);
