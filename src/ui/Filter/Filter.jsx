@@ -130,11 +130,11 @@ const Filter = (props) => {
   );
 };
 
-const stateToProps = (state) => ({
-  categories: state.categories,
-  currCategory: state.currCategory,
-  currAlbum: state.currAlbum,
-  albums: state.albums[state.currCategory].map((album) => album.name),
+const stateToProps = ({ logicState }) => ({
+  categories: logicState.categories,
+  currCategory: logicState.currCategory,
+  currAlbum: logicState.currAlbum,
+  albums: logicState.albums[logicState.currCategory].map((album) => album.name),
 });
 
 export default connect(stateToProps, { selectCategory, selectAlbum, addNewAlbum, editAlbumName })(Filter);

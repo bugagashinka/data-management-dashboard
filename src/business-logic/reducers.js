@@ -125,7 +125,7 @@ const albums = (state, { type, value }) => {
   }
 };
 
-const stateReducer = (state = initialState, action) => {
+const logicState = (state = initialState, action) => {
   return {
     categories: state.categories,
     currCategory: currCategory(state.currCategory, action),
@@ -183,7 +183,7 @@ const addNewAlbum = (albumName) => (dispatch) => {
 const editAlbumName = (currName, newName) => (dispatch) => dispatch(renameAlbum(currName, newName));
 
 export {
-  stateReducer as default,
+  logicState as default,
   selectCategory,
   selectAlbum,
   addNewAlbum,

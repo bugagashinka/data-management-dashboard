@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { syncWithStorage, checkUploadPermission } from "business-logic";
+import { syncWithStorage, checkUploadPermission } from "business-logic/reducers";
 import ModalWindowPortal from "ui/ModalWindow";
 
 const Profile = ({ currAlbum }) => {
@@ -50,8 +50,8 @@ const Profile = ({ currAlbum }) => {
   );
 };
 
-const stateToProps = ({ currAlbum }) => ({
-  currAlbum,
+const stateToProps = ({ logicState }) => ({
+  currAlbum: logicState.currAlbum,
 });
 
 export default connect(stateToProps, { syncWithStorage })(Profile);
