@@ -97,7 +97,7 @@ const albums = (state, { type, value }) => {
   switch (type) {
     case ADD_ALBUM:
       const dateSuffix = state.albums[state.currCategory].find((album) => album.name === value)
-        ? `-${new Date().toLocaleDateString()}-${new Date().toLocaleTimeString()}`
+        ? `-${new Date().toLocaleDateString("uk-UA")}-${new Date().toLocaleTimeString([], { hour12: false })}`
         : "";
       const newState = [...state.albums[state.currCategory]];
       newState.splice(1, 0, {
