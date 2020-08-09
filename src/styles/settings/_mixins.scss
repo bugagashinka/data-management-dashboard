@@ -45,6 +45,14 @@
 }
 
 @mixin scrollbar {
+  // Firefox scrollbar styles
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+  &:hover {
+    scrollbar-color: $scroll-thumb-color $scroll-track-color;
+  }
+
+  // Webkit scrollbar styles
   &::-webkit-scrollbar {
     width: 5px;
     visibility: hidden;
@@ -57,12 +65,12 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: $scroll-track-color;
       border-radius: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #b7b7b7;
+      background: $scroll-thumb-color;
       border-radius: 5px;
     }
 
