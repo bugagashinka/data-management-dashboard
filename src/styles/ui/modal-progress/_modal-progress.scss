@@ -1,0 +1,219 @@
+$progress-bar-width: 100%;
+
+.progress-list {
+  @include reset-list;
+  padding-right: 10px;
+}
+
+.modal-progress {
+  position: fixed;
+  width: 320px;
+  right: 34px;
+  bottom: 10px;
+  padding: 16px;
+  z-index: 1;
+  background-color: transparent;
+
+  &::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: block;
+    width: 320px;
+    height: 467px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+  }
+
+  &__top {
+    height: 360px;
+    margin-top: 15px;
+    transition: all 0.2s;
+    overflow: auto;
+    @include scrollbar;
+
+    // Show container over pseudo element
+    position: relative;
+  }
+  &__bottom {
+    margin: auto;
+    padding: 2px 5px;
+    margin-top: 15px;
+    // Show container over pseudo element
+    position: relative;
+    transition: all 0.3s;
+  }
+  .circle-btn {
+    transition: opacity 0.3s;
+    border: 1px solid transparent;
+  }
+}
+
+.progress-total__control {
+  display: flex;
+  width: 55px;
+  overflow: initial;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s;
+}
+
+.modal-progress_minimized {
+  visibility: hidden;
+
+  &::before {
+    width: 0;
+    height: 0;
+  }
+
+  .progress-list {
+    opacity: 0;
+  }
+
+  .modal-progress__top {
+    height: 0;
+  }
+  .progress-item {
+    height: 0;
+    width: 0;
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .modal-progress__bottom {
+    background: #fff;
+    padding: 2px 5px;
+    border-radius: 6px;
+    visibility: visible;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .progress-indicator {
+    margin: 0;
+  }
+  .progress-total__label {
+    display: block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s;
+  }
+
+  .circle-btn {
+    opacity: 0;
+  }
+  .progress-total__control {
+    overflow: hidden;
+    width: 0;
+  }
+}
+
+.progress-total__inner {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Total progress indicator
+.progress-indicator {
+  position: relative;
+  width: 100%;
+  margin-right: 5px;
+}
+
+.progress-bar {
+  width: $progress-bar-width;
+  appearance: none;
+  height: 15px;
+  vertical-align: text-top;
+
+  // Opera and Firefox border fix
+  border: none;
+
+  border-radius: 5px;
+  // Firefox progress container style
+  background-color: $progress-container-color;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1) inset;
+
+  &::-webkit-progress-bar {
+    border-radius: 5px;
+    background-color: $progress-container-color;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1) inset;
+  }
+
+  // Progress bar value indicator
+  &::-moz-progress-bar {
+    border-radius: 5px;
+    background-color: $panel-background;
+  }
+  &::-webkit-progress-value {
+    border-radius: 5px 3px 3px 5px;
+    background-color: $panel-background;
+  }
+}
+
+.progress-bar__value {
+  position: absolute;
+  bottom: 1px;
+  width: $progress-bar-width;
+  padding-right: 10px;
+  line-height: 15px;
+  font-size: 12px;
+  color: #fff;
+  text-align: right;
+  user-select: none;
+  mix-blend-mode: difference;
+}
+
+.progress-bar__pause-btn {
+  background-image: url(../../../assets/icon/pause-icon.svg);
+}
+.progress-bar__resume-btn {
+  background-image: url(../../../assets/icon/resume-icon.svg);
+}
+.progress-bar__cancel-btn {
+  background-image: url(../../../assets/icon/cancel-icon.svg);
+}
+.modal-progress__minimize-btn {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  background-image: url(../../../assets/icon/minimize-icon.svg);
+}
+
+@media screen and (max-width: 600px) {
+  .modal-progress {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .modal-progress {
+    &::before {
+      height: 297px;
+    }
+    &__top {
+      transition: all 0.2s;
+      margin-top: 15px;
+      height: 195px;
+    }
+  }
+  .modal-progress_minimized {
+    &::before {
+      width: 0;
+      height: 0;
+    }
+  }
+}

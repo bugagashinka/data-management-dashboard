@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="resume-icon.svg"
+   id="svg8"
+   xml:space="preserve"
+   enable-background="new 0 0 1000 1000"
+   viewBox="0 0 1000 1000"
+   y="0px"
+   x="0px"
+   version="1.1"><defs
+   id="defs12" /><sodipodi:namedview
+   inkscape:current-layer="svg8"
+   inkscape:window-maximized="1"
+   inkscape:window-y="-9"
+   inkscape:window-x="-9"
+   inkscape:cy="584.7048"
+   inkscape:cx="662.70094"
+   inkscape:zoom="0.58689863"
+   showgrid="false"
+   id="namedview10"
+   inkscape:window-height="1001"
+   inkscape:window-width="1920"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0"
+   guidetolerance="10"
+   gridtolerance="10"
+   objecttolerance="10"
+   borderopacity="1"
+   bordercolor="#666666"
+   pagecolor="#ffffff" />
+<metadata
+   id="metadata2"> Svg Vector Icons : http://www.onlinewebfonts.com/icon <rdf:RDF><cc:Work
+     rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+<g
+   transform="translate(-7.2289157,-4.8192771)"
+   id="g6"><path
+     sodipodi:nodetypes="cccccccc"
+     id="path4"
+     d="M 393.9,770.4 720.7,500 393.9,229.7 Z M 10,500.2 c -1.8473895,-330.25382 -0.9236948,-165.12691 0,0 z m 61.9,-0.1 c -43.114056,-330.18715 -21.557028,-165.09357 0,0 z" /></g>
+<path
+   sodipodi:nodetypes="ssssssssss"
+   style="stroke-width:3.81438;fill:#272631;fill-opacity:1"
+   fill="#272631"
+   d="m 987.05079,500.71335 c 0,-269.21913 -219.02181,-488.240969 -488.24092,-488.240969 -269.21912,0 -488.240983,219.021839 -488.240983,488.240969 0,269.21911 219.021863,488.24093 488.240983,488.24093 269.21911,0 488.24092,-219.02182 488.24092,-488.24093 z m -48.8279,0 c 0,242.29339 -197.11962,439.41683 -439.41302,439.41683 -242.29721,0 -439.416893,-197.12344 -439.416893,-439.41683 0,-242.29721 197.119683,-439.416879 439.416893,-439.416879 242.2934,0 439.41302,197.119669 439.41302,439.416879 z"
+   id="path2" /><path
+   id="path29"
+   d="m 386.67371,495.24816 c 0,-214.78458 0.42783,-268.43414 2.12984,-267.0833 31.93112,25.34276 321.02594,265.89648 320.98184,267.08667 -0.0466,1.25659 -239.42404,200.47167 -315.03098,262.17553 l -8.0807,6.59477 z"
+   style="fill:#272631;fill-opacity:1;stroke-width:1.70387" /></svg>

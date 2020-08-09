@@ -1,0 +1,37 @@
+.progress-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  max-width: 300px;
+  max-height: 100px;
+  transition: all 1s;
+
+  &__inner {
+    position: relative;
+    display: flex;
+  }
+  &__detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-grow: 1;
+  }
+  &__img {
+    display: block;
+    @include responsive-img;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    background: #f5f5f5;
+  }
+  &__label {
+    display: block;
+  }
+  &__stats {
+    position: absolute;
+    right: 0;
+  }
+
+  &__indicator {
+    height: 6px;
+  }
+}

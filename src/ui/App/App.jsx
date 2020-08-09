@@ -2,6 +2,7 @@ import React from "react";
 import Panel from "ui/Panel";
 import MainContent from "ui/MainContent";
 import MenuButton from "ui/MenuButton";
+import ModalProgressPortal from "ui/ModalProgress";
 import { Provider } from "react-redux";
 import store from "store";
 
@@ -16,6 +17,7 @@ function App() {
             <MenuButton />
             <Panel />
             <MainContent />
+            <ModalProgressPortal></ModalProgressPortal>
           </div>
         </div>
       </main>
