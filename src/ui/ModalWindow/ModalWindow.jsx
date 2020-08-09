@@ -19,5 +19,4 @@ const ModalWindow = ({ isVisible, onClose, children }) => {
       )
     : null;
 };
-
 export default ModalWindow;
