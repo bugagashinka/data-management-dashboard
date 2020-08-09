@@ -156,11 +156,11 @@ const renameAlbum = (currName, newName) => ({
   value: { currName, newName },
 });
 
-const syncWithStorage = (files) => (dispatch) => {
+const syncWithStorage = (basePath, endpoint, files) => (dispatch) => {
   if (!files.length) return;
 
   const uploadTask = uploadFiles(
-    "photos",
+    `${basePath}/${endpoint}`,
     files,
     (snapshot) => {
       console.log("Progress: ", snapshot);

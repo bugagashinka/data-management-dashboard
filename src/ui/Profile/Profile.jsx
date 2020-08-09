@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { syncWithStorage, checkUploadPermission } from "business-logic/reducers";
 import ModalWindowPortal from "ui/ModalWindow";
 
-const Profile = ({ currAlbum }) => {
+const Profile = ({ currCategory, currAlbum, syncWithStorage }) => {
   const [showModal, toggleModal] = useState(false);
   const [fileList, updateFileList] = useState([]);
 
@@ -21,8 +21,7 @@ const Profile = ({ currAlbum }) => {
     updateFileList(files);
   };
 
-  const syncHandler = (e) => syncWithStorage(fileList);
-
+  const syncHandler = (e) => syncWithStorage(currCategory, currAlbum, fileList);
   return (
     <section className="profile">
       <div className="profile__avatar">
@@ -30,7 +29,7 @@ const Profile = ({ currAlbum }) => {
       </div>
       <div className="h3 profile__name">Amelia Rice</div>
       <span className="profile__stats">2390 files</span>
-      <label className="button upload-btn" htmlFor="upload-btn">
+      <label className="button upload-btn" htmlFor="upload-btn" tabIndex="0">
         Upload
       </label>
       <input
@@ -52,6 +51,7 @@ const Profile = ({ currAlbum }) => {
 
 const stateToProps = ({ logicState }) => ({
   currAlbum: logicState.currAlbum,
+  currCategory: logicState.currCategory,
 });
 
 export default connect(stateToProps, { syncWithStorage })(Profile);
