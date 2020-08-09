@@ -180,11 +180,16 @@ const addNewAlbum = (albumName) => (dispatch) => {
   dispatch(selectAlbum(albumName));
 };
 
+const changeCategory = (categoryName) => (dispatch) => {
+  dispatch(selectCategory(categoryName));
+  dispatch(selectAlbum(DEFAULT_ALBUM_NAME));
+};
+
 const editAlbumName = (currName, newName) => (dispatch) => dispatch(renameAlbum(currName, newName));
 
 export {
   logicState as default,
-  selectCategory,
+  changeCategory,
   selectAlbum,
   addNewAlbum,
   syncWithStorage,

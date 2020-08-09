@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
-import { selectCategory, selectAlbum, addNewAlbum, editAlbumName } from "business-logic/reducers";
+import { changeCategory, selectAlbum, addNewAlbum, editAlbumName } from "business-logic/reducers";
 
 const LIST_ITEM_LIMIT = 18;
 const inputModeEnum = {
@@ -21,7 +21,7 @@ const Filter = (props) => {
     currCategory,
     currAlbum,
     albums,
-    selectCategory,
+    changeCategory,
     selectAlbum,
     addNewAlbum,
     editAlbumName,
@@ -29,7 +29,7 @@ const Filter = (props) => {
 
   const selectCategoryHandler = (category) => (e) => {
     e.preventDefault();
-    selectCategory(category);
+    changeCategory(category);
   };
 
   const selectAlbumHandler = (album) => (e) => {
@@ -137,4 +137,4 @@ const stateToProps = ({ logicState }) => ({
   albums: logicState.albums[logicState.currCategory].map((album) => album.name),
 });
 
-export default connect(stateToProps, { selectCategory, selectAlbum, addNewAlbum, editAlbumName })(Filter);
+export default connect(stateToProps, { changeCategory, selectAlbum, addNewAlbum, editAlbumName })(Filter);
