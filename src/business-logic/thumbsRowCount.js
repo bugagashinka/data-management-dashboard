@@ -5,10 +5,8 @@ const deviceSize = {
   MOBILE: 0,
 
   getDeviceGroup: function (width) {
-    console.log("width ", width);
     for (let deviceGroup of Object.keys(this)) {
       const deviceGroupSize = this[deviceGroup];
-      console.log(width >= deviceGroupSize, `${width} >= ${deviceGroupSize}`);
       if (width >= deviceGroupSize) return deviceGroupSize;
     }
     return this.SMALL;

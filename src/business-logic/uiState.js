@@ -36,9 +36,7 @@ const thumbsPerRow = (state, { type }) => {
     case UPDATE_THUMB_COUNT:
       const [width] = state.screenSize;
       const currentDeviceSizeGroup = deviceSize.getDeviceGroup(width);
-      console.log("currentDeviceSizeGroup ", currentDeviceSizeGroup);
       const thumbsCountsForSize = thumbsRowCount[currentDeviceSizeGroup];
-      console.log(thumbsCountsForSize, state.scaleFactor);
       return thumbsCountsForSize[state.scaleFactor];
     default:
       return state.thumbsPerRow;
@@ -66,7 +64,6 @@ const updateThumbsCount = () => ({
 });
 
 const scale = (factor) => (dispatch) => {
-  console.log("scale factor ", factor);
   dispatch(setScaleFactor(factor));
   dispatch(updateThumbsCount());
 };

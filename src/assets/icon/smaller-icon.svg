@@ -1,37 +1,45 @@
-<svg id="Smaller_icon" data-name="Smaller icon" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
-  <defs>
-    <style>
-      .cls-1 {
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Smaller_icon" width="21" height="21" data-name="Smaller icon" version="1.1" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style>.cls-1 {
         fill: none;
         stroke: #ea5a5a;
         stroke-width: 1px;
-      }
-    </style>
-  </defs>
-  <rect class="cls-1" x="0.5" y="0.5" width="20" height="20"/>
-  <rect class="cls-1" x="3.5" y="3.5" width="2" height="2"/>
-  <rect class="cls-1" x="6.5" y="3.5" width="2" height="2"/>
-  <rect class="cls-1" x="9.5" y="3.5" width="2" height="2"/>
-  <rect class="cls-1" x="12.5" y="3.5" width="2" height="2"/>
-  <rect class="cls-1" x="15.5" y="3.5" width="2" height="2"/>
-  <rect class="cls-1" x="3.5" y="6.5" width="2" height="2"/>
-  <rect class="cls-1" x="6.5" y="6.5" width="2" height="2"/>
-  <rect class="cls-1" x="9.5" y="6.5" width="2" height="2"/>
-  <rect class="cls-1" x="12.5" y="6.5" width="2" height="2"/>
-  <rect class="cls-1" x="15.5" y="6.5" width="2" height="2"/>
-  <rect class="cls-1" x="3.5" y="9.5" width="2" height="2"/>
-  <rect class="cls-1" x="6.5" y="9.5" width="2" height="2"/>
-  <rect class="cls-1" x="9.5" y="9.5" width="2" height="2"/>
-  <rect class="cls-1" x="12.5" y="9.5" width="2" height="2"/>
-  <rect class="cls-1" x="15.5" y="9.5" width="2" height="2"/>
-  <rect class="cls-1" x="3.5" y="12.5" width="2" height="2"/>
-  <rect class="cls-1" x="6.5" y="12.5" width="2" height="2"/>
-  <rect class="cls-1" x="9.5" y="12.5" width="2" height="2"/>
-  <rect class="cls-1" x="12.5" y="12.5" width="2" height="2"/>
-  <rect class="cls-1" x="15.5" y="12.5" width="2" height="2"/>
-  <rect class="cls-1" x="3.5" y="15.5" width="2" height="2"/>
-  <rect class="cls-1" x="6.5" y="15.5" width="2" height="2"/>
-  <rect class="cls-1" x="9.5" y="15.5" width="2" height="2"/>
-  <rect class="cls-1" x="12.5" y="15.5" width="2" height="2"/>
-  <rect class="cls-1" x="15.5" y="15.5" width="2" height="2"/>
+      }</style>
+ </defs>
+ <rect class="cls-1" x=".5" y=".5" width="20" height="20"/>
+ <rect class="cls-1" x="3.5" y="3.5" width="2" height="2"/>
+ <rect class="cls-1" x="6.5" y="3.5" width="2" height="2"/>
+ <rect class="cls-1" x="9.5" y="3.5" width="2" height="2"/>
+ <rect class="cls-1" x="12.5" y="3.5" width="2" height="2"/>
+ <rect class="cls-1" x="15.5" y="3.5" width="2" height="2"/>
+ <rect class="cls-1" x="3.5" y="6.5" width="2" height="2"/>
+ <rect class="cls-1" x="6.5" y="6.5" width="2" height="2"/>
+ <rect class="cls-1" x="9.5" y="6.5" width="2" height="2"/>
+ <rect class="cls-1" x="12.5" y="6.5" width="2" height="2"/>
+ <rect class="cls-1" x="15.5" y="6.5" width="2" height="2"/>
+ <rect class="cls-1" x="3.5" y="9.5" width="2" height="2"/>
+ <rect class="cls-1" x="6.5" y="9.5" width="2" height="2"/>
+ <rect class="cls-1" x="9.5" y="9.5" width="2" height="2"/>
+ <rect class="cls-1" x="12.5" y="9.5" width="2" height="2"/>
+ <rect class="cls-1" x="15.5" y="9.5" width="2" height="2"/>
+ <rect class="cls-1" x="3.5" y="12.5" width="2" height="2"/>
+ <rect class="cls-1" x="6.5" y="12.5" width="2" height="2"/>
+ <rect class="cls-1" x="9.5" y="12.5" width="2" height="2"/>
+ <rect class="cls-1" x="12.5" y="12.5" width="2" height="2"/>
+ <rect class="cls-1" x="15.5" y="12.5" width="2" height="2"/>
+ <rect class="cls-1" x="3.5" y="15.5" width="2" height="2"/>
+ <rect class="cls-1" x="6.5" y="15.5" width="2" height="2"/>
+ <rect class="cls-1" x="9.5" y="15.5" width="2" height="2"/>
+ <rect class="cls-1" x="12.5" y="15.5" width="2" height="2"/>
+ <rect class="cls-1" x="15.5" y="15.5" width="2" height="2"/>
 </svg>

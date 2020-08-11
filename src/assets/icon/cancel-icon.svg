@@ -7,62 +7,66 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="cancel-icon.svg"
-   xml:space="preserve"
-   style="enable-background:new 0 0 426.667 426.667;"
-   viewBox="0 0 426.667 426.667"
-   y="0px"
-   x="0px"
+   height="32.666988"
+   width="32.666988"
+   version="1.1"
    id="Layer_1"
-   version="1.1"><metadata
+   x="0px"
+   y="0px"
+   viewBox="0 0 32.666989 32.666989"
+   xml:space="preserve"
+   sodipodi:docname="cancel-icon.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"><metadata
    id="metadata49"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
    id="defs47" /><sodipodi:namedview
-   inkscape:current-layer="Layer_1"
-   inkscape:window-maximized="1"
-   inkscape:window-y="-9"
-   inkscape:window-x="-9"
-   inkscape:cy="242.26955"
-   inkscape:cx="66.38789"
-   inkscape:zoom="1.3755426"
-   showgrid="false"
-   id="namedview45"
-   inkscape:window-height="1001"
-   inkscape:window-width="1920"
-   inkscape:pageshadow="2"
-   inkscape:pageopacity="0"
-   guidetolerance="10"
-   gridtolerance="10"
-   objecttolerance="10"
-   borderopacity="1"
+   inkscape:document-rotation="0"
+   pagecolor="#ffffff"
    bordercolor="#666666"
-   pagecolor="#ffffff" />
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1001"
+   id="namedview45"
+   showgrid="false"
+   inkscape:zoom="15.562488"
+   inkscape:cx="26.331899"
+   inkscape:cy="18.975859"
+   inkscape:window-x="-9"
+   inkscape:window-y="-9"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
 <g
+   transform="matrix(0.07623464,0,0,0.07623464,0.15196876,-0.058255)"
    id="g6">
 	<g
-   id="g4"
-   fill="red">
+   fill="#ff0000"
+   id="g4">
 		<polygon
-   id="polygon2"
-   points="303.147,153.813 272.853,123.52 213.333,183.253 153.813,123.52 123.52,153.813 183.253,213.333 123.52,272.853     153.813,303.147 213.333,243.413 272.853,303.147 303.147,272.853 243.413,213.333   " />
+   points="243.413,213.333 303.147,153.813 272.853,123.52 213.333,183.253 153.813,123.52 123.52,153.813 183.253,213.333 123.52,272.853 153.813,303.147 213.333,243.413 272.853,303.147 303.147,272.853 "
+   id="polygon2" />
 	</g>
 </g>
 <g
-   style="fill:#ff0000"
-   id="g12">
+   transform="matrix(0.07623464,0,0,0.07623464,0.15196876,-0.058255)"
+   id="g12"
+   style="fill:#ff0000">
 	<g
-   style="fill:#ff0000"
+   fill="red"
    id="g10"
-   fill="red">
+   style="fill:#ff0000">
 		
 	<path
-   style="stroke-width:1.63623;fill:#ff0000"
-   sodipodi:nodetypes="ssssssssss"
-   fill="#272631"
+   id="path2"
    d="m 423.57736,213.57596 c 0,-114.885919 -94.4433,-208.3507696 -210.5319,-208.3507696 -116.088637,0 -210.5319413,93.4648506 -210.5319413,208.3507696 0,114.88592 94.4433043,208.35076 210.5319413,208.35076 116.0886,0 210.5319,-93.46484 210.5319,-208.35076 z m -21.05483,0 c 0,103.39571 -84.99898,187.51568 -189.47707,187.51568 -104.47978,0 -189.478744,-84.11997 -189.478744,-187.51568 0,-103.39731 84.998964,-187.515697 189.478744,-187.515697 104.47809,0 189.47707,84.118387 189.47707,187.515697 z"
-   id="path2" /></g>
+   fill="#272631"
+   sodipodi:nodetypes="ssssssssss"
+   style="fill:#ff0000;stroke-width:1.63623" /></g>
 </g>
 <g
    id="g14">

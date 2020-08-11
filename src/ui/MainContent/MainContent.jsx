@@ -7,8 +7,6 @@ import { connect } from "react-redux";
 const MainContent = ({ thumbsPerRow, resize }) => {
   const [windowWidth, windowHeight] = useWindowSize();
 
-  console.log(thumbsPerRow);
-
   useEffect(() => {
     resize([windowWidth, windowHeight]);
   }, [windowWidth]);
