@@ -1,10 +1,11 @@
 import categories from "./categoriesEnum";
-import { uploadFiles } from "services/FirestoreService";
+import { uploadFiles, getCurrentTask, fileUploadStatus } from "services/FirestoreService";
 
 const SET_CATEGORY = "reducers/SET_CATEGORY";
 const SET_ALBUM = "reducers/SET_ALBUM";
 const ADD_ALBUM = "reducers/ADD_ALBUM";
 const RENAME_ALBUM = "reducers/RENAME_ALBUM";
+const UPDATE_SYNC_PROGRESS = "reducers/UPDATE_SYNC_PROGRESS";
 
 const { PHOTOS_CATEGORY, VIDEOS_CATEGORY, AUDIOS_CATEGORY } = categories;
 const DEFAULT_ALBUM_NAME = "All";
@@ -13,7 +14,14 @@ const initialState = {
   categories: [PHOTOS_CATEGORY, VIDEOS_CATEGORY, AUDIOS_CATEGORY],
   currCategory: PHOTOS_CATEGORY,
   currAlbum: DEFAULT_ALBUM_NAME,
-  currentTask: null,
+  syncDataProgress: {
+    totalCount: 0,
+    uploadedCount: 0,
+    totalBytes: 0,
+    bytesTransferred: 0,
+    status: fileUploadStatus.DONE,
+    progress: [],
+  },
   albums: {
     [PHOTOS_CATEGORY]: [
       {
@@ -75,6 +83,17 @@ const initialState = {
   searchQuery: "",
 };
 
+const syncDataProgress = (state, { type, value }) => {
+  switch (type) {
+    case UPDATE_SYNC_PROGRESS:
+      return {
+        ...value,
+      };
+    default:
+      return state;
+  }
+};
+
 const currCategory = (state, action) => {
   switch (action.type) {
     case SET_CATEGORY:
@@ -130,8 +149,8 @@ const logicState = (state = initialState, action) => {
     categories: state.categories,
     currCategory: currCategory(state.currCategory, action),
     currAlbum: currAlbum(state.currAlbum, action),
-    currentTask: state.currentTask,
     albums: albums(state, action),
+    syncDataProgress: syncDataProgress(state.syncDataProgress, action),
     searchQuery: state.searchQuery,
   };
 };
@@ -156,24 +175,42 @@ const renameAlbum = (currName, newName) => ({
   value: { currName, newName },
 });
 
+const updateSyncProgress = (data) => ({
+  type: UPDATE_SYNC_PROGRESS,
+  value: data,
+});
+
 const syncWithStorage = (basePath, endpoint, files) => (dispatch) => {
   if (!files.length) return;
 
-  const uploadTask = uploadFiles(
+  uploadFiles(
     `${basePath}/${endpoint}`,
     files,
     (snapshot) => {
       console.log("Progress: ", snapshot);
+      dispatch(updateSyncProgress(snapshot));
     },
     (result) => {
       console.log("Complete: ", result);
+      dispatch(updateSyncProgress(result));
     }
   );
 };
 
-const checkUploadPermission = (currAlbum) => {
-  return currAlbum !== DEFAULT_ALBUM_NAME;
+const syncCancel = () => {
+  if (getCurrentTask()) getCurrentTask().cancel();
 };
+
+const syncPause = () => {
+  if (getCurrentTask()) getCurrentTask().pause();
+};
+const syncResume = () => {
+  if (getCurrentTask()) getCurrentTask().resume();
+};
+
+const checkUploadPermission = (currAlbum) => currAlbum !== DEFAULT_ALBUM_NAME;
+
+const checkSyncInProgress = (status) => status === fileUploadStatus.IN_PROGRESS;
 
 const addNewAlbum = (albumName) => (dispatch) => {
   dispatch(addAlbum(albumName));
@@ -195,4 +232,8 @@ export {
   syncWithStorage,
   editAlbumName,
   checkUploadPermission,
+  syncCancel,
+  syncPause,
+  syncResume,
+  checkSyncInProgress,
 };
