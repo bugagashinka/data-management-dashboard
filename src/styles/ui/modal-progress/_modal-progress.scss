@@ -11,6 +11,7 @@ $progress-bar-width: 100%;
   right: 34px;
   bottom: 10px;
   padding: 16px;
+  padding-right: 3px;
   z-index: 1;
   background-color: transparent;
 
@@ -43,6 +44,7 @@ $progress-bar-width: 100%;
   &__bottom {
     margin: auto;
     padding: 2px 5px;
+    padding-right: 13px;
     margin-top: 15px;
     // Show container over pseudo element
     position: relative;
@@ -54,13 +56,20 @@ $progress-bar-width: 100%;
   }
 }
 
-.progress-total__control {
-  display: flex;
-  width: 55px;
-  overflow: initial;
-  justify-content: center;
-  align-items: center;
-  transition: width 0.3s;
+.progress-total {
+  visibility: hidden;
+
+  &_visible {
+    visibility: visible;
+  }
+  &__control {
+    display: flex;
+    width: 55px;
+    overflow: initial;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.3s;
+  }
 }
 
 .modal-progress_minimized {
@@ -90,9 +99,21 @@ $progress-bar-width: 100%;
     background: #fff;
     padding: 2px 5px;
     border-radius: 6px;
-    visibility: visible;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -6px;
+      display: inline-block;
+      height: 13px;
+      width: 13px;
+      background-color: #fff;
+      transform: translateX(-50%) rotate(-45deg);
+      @include background-image;
+    }
   }
 
   .progress-indicator {
@@ -167,8 +188,8 @@ $progress-bar-width: 100%;
   bottom: 1px;
   width: $progress-bar-width;
   padding-right: 10px;
-  line-height: 15px;
-  font-size: 12px;
+  line-height: 14px;
+  font-size: 10px;
   color: #fff;
   text-align: right;
   user-select: none;

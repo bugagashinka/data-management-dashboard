@@ -6,10 +6,10 @@
   transition: all 1s;
 
   &__inner {
-    position: relative;
     display: flex;
   }
   &__detail {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -20,15 +20,26 @@
     @include responsive-img;
     width: 40px;
     height: 40px;
-    margin-right: 20px;
+    margin-right: 12px;
     background: #f5f5f5;
   }
   &__label {
     display: block;
+    font-size: 10px;
   }
   &__stats {
     position: absolute;
     right: 0;
+  }
+  &__status {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    margin-bottom: 4px;
+    margin-left: 5px;
+    @include background-image;
+    background-position: center bottom;
+    background-size: 65%;
   }
 
   &__indicator {
