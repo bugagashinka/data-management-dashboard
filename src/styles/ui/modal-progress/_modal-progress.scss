@@ -48,7 +48,6 @@ $progress-bar-width: 100%;
     margin-top: 15px;
     // Show container over pseudo element
     position: relative;
-    transition: all 0.3s;
   }
   .circle-btn {
     transition: opacity 0.3s;
@@ -62,6 +61,7 @@ $progress-bar-width: 100%;
   &_visible {
     visibility: visible;
   }
+
   &__control {
     display: flex;
     width: 55px;
@@ -69,6 +69,25 @@ $progress-bar-width: 100%;
     justify-content: center;
     align-items: center;
     transition: width 0.3s;
+  }
+}
+
+.progress-total__retry-btn {
+  display: none;
+  text-decoration: underline;
+  margin-left: -6px;
+  opacity: 0;
+  padding: 0;
+  transition: opacity 0.3s;
+}
+
+.modal-progress:not(.modal-progress_minimized) {
+  .progress-total:not(.progress-total_visible) {
+    .progress-total__retry-btn {
+      visibility: visible;
+      opacity: 1;
+      display: inline;
+    }
   }
 }
 

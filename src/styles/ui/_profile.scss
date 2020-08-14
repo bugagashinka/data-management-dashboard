@@ -52,6 +52,16 @@
     border-color: #fff;
   }
 }
+.upload-btn_inactive {
+  cursor: default;
+  opacity: 0.5;
+  &:focus {
+    border-color: transparent;
+  }
+  &:hover {
+    opacity: 0.5;
+  }
+}
 @keyframes sync {
   from {
     transform: rotate(0deg);
@@ -61,15 +71,36 @@
   }
 }
 .sync-btn {
+  position: relative;
   width: 40px;
-  height: 40px;
-  @include background-image;
-  transition: opacity 0.2s;
-  background-image: url(../../assets/icon/cloud-sync.svg);
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: opacity, height 0.4s;
 
-  &.active,
-  &:active {
-    animation: sync 1.5s infinite;
+  &::before {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 40px;
+    height: 40px;
+    content: "";
+    display: inline-block;
+    @include background-image;
+    background-image: url(../../assets/icon/cloud-sync.svg);
+  }
+
+  &_visible {
+    opacity: 1;
+    visibility: visible;
+    height: 40px;
+  }
+
+  &_active {
+    &::before {
+      animation: sync 1.5s infinite;
+    }
     border-color: transparent;
   }
 }

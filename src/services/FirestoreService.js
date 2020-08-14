@@ -5,6 +5,7 @@ const fileUploadStatus = {
   IN_PROGRESS: "IN_PROGRESS",
   DONE: "DONE",
   CANCELED: "CANCELED",
+  ON_PAUSE: "ON_PAUSE",
 };
 
 // Set the app configuration
@@ -31,14 +32,13 @@ const uploadFile = (path, file) => {
   return storageRef.child(`${path}/${file.name}`).put(file);
 };
 
-const updateTaskProgressSnapshot = (progress, snapshot, downloadURL = null, error = null) => {
+const updateTaskProgressSnapshot = (progress, snapshot, status, downloadURL = null, error = null) => {
   return progress.map((fileProgressData) => {
-    const status = downloadURL ? fileUploadStatus.DONE : fileUploadStatus.IN_PROGRESS;
     if (fileProgressData.name === snapshot.ref.name) {
       return {
         ...fileProgressData,
         url: downloadURL,
-        status: error ? fileUploadStatus.CANCELED : status,
+        status,
         bytesTransferred: snapshot.bytesTransferred,
         totalBytes: snapshot.totalBytes,
         error,
@@ -48,10 +48,11 @@ const updateTaskProgressSnapshot = (progress, snapshot, downloadURL = null, erro
   });
 };
 
-const createTaskProgressSnapshot = (taskSnaphot) => ({
+const createTaskProgressSnapshot = (taskSnaphot, file) => ({
   name: taskSnaphot.ref.name,
   path: taskSnaphot.ref.fullPath,
   url: null,
+  source: file,
   status: fileUploadStatus.IN_PROGRESS,
   bytesTransferred: taskSnaphot.bytesTransferred,
   totalBytes: taskSnaphot.totalBytes,
@@ -78,14 +79,23 @@ const uploadFiles = (path, files = [], progressCallback, completeCallback) => {
         //Calculate files total size
         totalBytes += taskRef.totalBytes;
 
-        progress.push(createTaskProgressSnapshot(uploadTask.snapshot));
+        progress.push(createTaskProgressSnapshot(uploadTask.snapshot, file));
 
         uploadTask.on(
           firebase.storage.TaskEvent.STATE_CHANGED,
           (snapshot) => {
-            bytesTransferred = 0;
+            let uploadTaskStatus;
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED:
+                uploadTaskStatus = fileUploadStatus.ON_PAUSE;
+                break;
+              case firebase.storage.TaskState.RUNNING:
+                uploadTaskStatus = fileUploadStatus.IN_PROGRESS;
+                break;
+            }
 
-            progress = updateTaskProgressSnapshot(progress, snapshot);
+            bytesTransferred = 0;
+            progress = updateTaskProgressSnapshot(progress, snapshot, uploadTaskStatus);
             progress.forEach((fileProgressData) => {
               bytesTransferred += fileProgressData.bytesTransferred;
             });
@@ -96,17 +106,23 @@ const uploadFiles = (path, files = [], progressCallback, completeCallback) => {
               totalBytes,
               bytesTransferred,
               progress,
-              status: fileUploadStatus.IN_PROGRESS,
+              status: uploadTaskStatus,
             });
           },
           (error) => {
-            progress = updateTaskProgressSnapshot(progress, uploadTask.snapshot, null, error);
+            progress = updateTaskProgressSnapshot(
+              progress,
+              uploadTask.snapshot,
+              fileUploadStatus.CANCELED,
+              null,
+              error
+            );
             res();
           },
           () => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
               uploadedCount++;
-              progress = updateTaskProgressSnapshot(progress, uploadTask.snapshot, downloadURL);
+              progress = updateTaskProgressSnapshot(progress, uploadTask.snapshot, fileUploadStatus.DONE, downloadURL);
               progressCallback({
                 totalCount,
                 uploadedCount,
@@ -135,8 +151,16 @@ const uploadFiles = (path, files = [], progressCallback, completeCallback) => {
   activeTask = {
     cancel: () => {
       uploadTaskList.forEach((task) => {
-        task.pause();
+        task.resume();
         task.cancel();
+      });
+      completeCallback({
+        totalCount,
+        uploadedCount,
+        totalBytes,
+        bytesTransferred,
+        progress,
+        status: fileUploadStatus.CANCELED,
       });
       activeTask = null;
     },

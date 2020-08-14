@@ -5,6 +5,7 @@ import { fileUploadStatus } from "services/FirestoreService";
 import statusOkIcon from "assets/icon/status-ok-icon.svg";
 import statusCancelIcon from "assets/icon/status-cancel-icon.svg";
 import statusPauseIcon from "assets/icon/status-pause-icon.svg";
+import statusProgressIcon from "assets/icon/status-progress-icon.svg";
 
 const PROGRESS_LABEL_LIMIT = 15;
 
@@ -13,9 +14,11 @@ const ProgressItem = ({ data }) => {
     if (status === fileUploadStatus.DONE) {
       return statusOkIcon;
     } else if (status === fileUploadStatus.IN_PROGRESS) {
-      return "";
+      return statusProgressIcon;
     } else if (status === fileUploadStatus.CANCELED) {
       return statusCancelIcon;
+    } else if (status === fileUploadStatus.ON_PAUSE) {
+      return statusPauseIcon;
     }
   };
 

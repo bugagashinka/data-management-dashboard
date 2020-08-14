@@ -180,11 +180,22 @@ const updateSyncProgress = (data) => ({
   value: data,
 });
 
-const syncWithStorage = (basePath, endpoint, files) => (dispatch) => {
+const resyncCanceled = (taskSnapshotList = []) => (dispatch) => {
+  const resyncFileList = taskSnapshotList
+    .filter((task) => task.status === fileUploadStatus.CANCELED)
+    .map((task) => task.source);
+
+  if (taskSnapshotList) {
+    const pathNodes = taskSnapshotList[0].path.split("/").slice(0, -1);
+    dispatch(syncWithStorage(pathNodes.slice(0, -1), pathNodes.slice(-1), resyncFileList));
+  }
+};
+
+const syncWithStorage = (basePath, endpoint, files, callback) => (dispatch) => {
   if (!files.length) return;
 
   uploadFiles(
-    `${basePath}/${endpoint}`,
+    `${basePath}/${endpoint}`.replace(/\s/g, "-"),
     files,
     (snapshot) => {
       console.log("Progress: ", snapshot);
@@ -193,6 +204,7 @@ const syncWithStorage = (basePath, endpoint, files) => (dispatch) => {
     (result) => {
       console.log("Complete: ", result);
       dispatch(updateSyncProgress(result));
+      if (callback) callback();
     }
   );
 };
@@ -210,7 +222,7 @@ const syncResume = () => {
 
 const checkUploadPermission = (currAlbum) => currAlbum !== DEFAULT_ALBUM_NAME;
 
-const checkSyncInProgress = (status) => status === fileUploadStatus.IN_PROGRESS;
+const checkSyncInProgress = (status) => status === fileUploadStatus.IN_PROGRESS || status === fileUploadStatus.ON_PAUSE;
 
 const addNewAlbum = (albumName) => (dispatch) => {
   dispatch(addAlbum(albumName));
@@ -236,4 +248,5 @@ export {
   syncPause,
   syncResume,
   checkSyncInProgress,
+  resyncCanceled,
 };

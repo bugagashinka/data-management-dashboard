@@ -35,11 +35,11 @@
     content: "";
     display: inline-block;
     width: 12px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     margin-left: 5px;
     @include background-image;
     background-position: center bottom;
-    background-size: 65%;
+    background-size: 100%;
   }
 
   &__indicator {

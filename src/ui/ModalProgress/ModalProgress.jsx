@@ -3,16 +3,16 @@ import classNames from "classnames";
 import ProgressItem from "./ProgressItem";
 import { connect } from "react-redux";
 import { bytesToMb } from "utils";
-import { syncCancel, syncResume, syncPause, checkSyncInProgress } from "business-logic/reducers";
+import { syncCancel, syncResume, syncPause, checkSyncInProgress, resyncCanceled } from "business-logic/reducers";
 
-const ModalProgress = ({ progressData }) => {
+const ModalProgress = ({ progressData, resyncCanceled }) => {
   const [asyncActive, toggleSyncProcess] = useState(true);
   const [isVisible, toggleWindow] = useState(false);
 
   const toggleModalWindow = () => {
     toggleWindow((isVisible) => !isVisible);
   };
-  const toggleSync = () => {
+  const toggleSyncHandler = () => {
     toggleSyncProcess((state) => {
       if (state) {
         syncPause();
@@ -21,6 +21,26 @@ const ModalProgress = ({ progressData }) => {
       }
       return !state;
     });
+  };
+
+  const syncCancelHandler = () => {
+    toggleSyncProcess(true);
+    syncCancel();
+  };
+
+  const isAllUploaded = () => progressData.totalCount === progressData.uploadedCount;
+
+  const retryUploadButton = () =>
+    isAllUploaded ? (
+      <button className="button progress-total__retry-btn" onClick={retryHandler} href="#">
+        Retry canceled
+      </button>
+    ) : null;
+
+  const retryHandler = (e) => {
+    console.log("progressData: ", progressData.progress);
+    resyncCanceled(progressData.progress);
+    e.preventDefault();
   };
 
   const modalWindowStyle = classNames("modal-progress", {
@@ -48,6 +68,8 @@ const ModalProgress = ({ progressData }) => {
         })}
         onClick={!isVisible ? toggleModalWindow : null}
       >
+        {retryUploadButton()}
+
         <label htmlFor="progress-bar" className="progress-total__label">
           {`${progressData.uploadedCount} of ${progressData.totalCount} uploaded`}
         </label>
@@ -64,8 +86,12 @@ const ModalProgress = ({ progressData }) => {
             ></progress>
           </div>
           <div className="progress-total__control">
-            <button onClick={toggleSync} className={syncControlButtonStyles} type="button"></button>
-            <button onClick={syncCancel} className="button circle-btn progress-bar__cancel-btn" type="button"></button>
+            <button onClick={toggleSyncHandler} className={syncControlButtonStyles} type="button"></button>
+            <button
+              onClick={syncCancelHandler}
+              className="button circle-btn progress-bar__cancel-btn"
+              type="button"
+            ></button>
           </div>
         </div>
       </section>
@@ -77,4 +103,4 @@ const stateToProps = ({ logicState }) => ({
   progressData: logicState.syncDataProgress,
 });
 
-export default connect(stateToProps, {})(ModalProgress);
+export default connect(stateToProps, { resyncCanceled })(ModalProgress);
