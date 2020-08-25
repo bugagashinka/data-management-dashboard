@@ -26,7 +26,27 @@ const storageRef = firebase.storage().ref();
 
 let activeTask = null;
 
-const downloadFiles = (data = []) => {};
+const downloadFiles = async (path) => {
+  const listRef = storageRef.child(path);
+  const res = await listRef.listAll();
+  return await Promise.all(
+    res.items.map((itemRef) => {
+      return itemRef.getDownloadURL();
+    })
+  );
+};
+
+const downloadFolders = async (path) => {
+  const content = [];
+  const listRef = storageRef.child(path);
+  try {
+    const res = await listRef.listAll();
+    res.prefixes.forEach((folderRef) => {
+      content.push(folderRef.name);
+    });
+  } catch (errr) {}
+  return content;
+};
 
 const uploadFile = (path, file) => {
   return storageRef.child(`${path}/${file.name}`).put(file);
@@ -171,4 +191,4 @@ const uploadFiles = (path, files = [], progressCallback, completeCallback) => {
 
 const getCurrentTask = () => activeTask;
 
-export { downloadFiles, uploadFiles, getCurrentTask, fileUploadStatus };
+export { downloadFiles, downloadFolders, uploadFiles, getCurrentTask, fileUploadStatus };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { changeCategory, selectAlbum, addNewAlbum, editAlbumName } from "business-logic/reducers";
@@ -26,6 +26,10 @@ const Filter = (props) => {
     addNewAlbum,
     editAlbumName,
   } = props;
+
+  useEffect(() => {
+    changeCategory(currCategory);
+  }, []);
 
   const selectCategoryHandler = (category) => (e) => {
     e.preventDefault();

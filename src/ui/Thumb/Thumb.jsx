@@ -1,12 +1,12 @@
 import React from "react";
 import aspen from "assets/images/aspen.jpg";
 
-const Thumb = ({ className }) => {
+const Thumb = ({ url, className }) => {
   return (
     <li className={`album__thumb ${className}`}>
       <a href="#" className="album__thumb-link">
         <div className="album__thumb-content">
-          <img className="album__thumb-img" src={aspen} alt="" />
+          <img className="album__thumb-img" src={url} alt="" />
           <div className="album__thumb-exif">
             <span className="album__thumb-time">5:40 PM</span>
             <span className="album__thumb-aperture">f/8</span>

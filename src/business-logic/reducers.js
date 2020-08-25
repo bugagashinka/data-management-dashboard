@@ -1,9 +1,16 @@
 import categories from "./categoriesEnum";
-import { uploadFiles, getCurrentTask, fileUploadStatus } from "services/FirestoreService";
+import {
+  uploadFiles,
+  getCurrentTask,
+  fileUploadStatus,
+  downloadFiles,
+  downloadFolders,
+} from "services/FirestoreService";
 
 const SET_CATEGORY = "reducers/SET_CATEGORY";
 const SET_ALBUM = "reducers/SET_ALBUM";
 const ADD_ALBUM = "reducers/ADD_ALBUM";
+const INIT_ALBUMS = "reducers/INIT_ALBUMS";
 const RENAME_ALBUM = "reducers/RENAME_ALBUM";
 const UPDATE_SYNC_PROGRESS = "reducers/UPDATE_SYNC_PROGRESS";
 
@@ -23,31 +30,7 @@ const initialState = {
     progress: [],
   },
   albums: {
-    [PHOTOS_CATEGORY]: [
-      {
-        name: DEFAULT_ALBUM_NAME,
-      },
-      {
-        name: "Subcarpathia 2016",
-        type: PHOTOS_CATEGORY,
-        urlList: [],
-      },
-      {
-        name: "Name of Album",
-        type: PHOTOS_CATEGORY,
-        urlList: [],
-      },
-      {
-        name: "Summer 2015",
-        type: PHOTOS_CATEGORY,
-        urlList: [],
-      },
-      {
-        name: "Aspen 2016",
-        type: PHOTOS_CATEGORY,
-        urlList: [],
-      },
-    ],
+    [PHOTOS_CATEGORY]: [],
     [VIDEOS_CATEGORY]: [
       {
         name: DEFAULT_ALBUM_NAME,
@@ -114,6 +97,11 @@ const currAlbum = (state, action) => {
 
 const albums = (state, { type, value }) => {
   switch (type) {
+    case INIT_ALBUMS:
+      return {
+        ...state.albums,
+        [state.currCategory]: value,
+      };
     case ADD_ALBUM:
       const dateSuffix = state.albums[state.currCategory].find((album) => album.name === value)
         ? `-${new Date().toLocaleDateString("uk-UA")}-${new Date().toLocaleTimeString([], { hour12: false })}`
@@ -158,6 +146,11 @@ const logicState = (state = initialState, action) => {
 const selectCategory = (categoryName) => ({
   type: SET_CATEGORY,
   value: categoryName,
+});
+
+const initAlbums = (albums) => ({
+  type: INIT_ALBUMS,
+  value: albums,
 });
 
 const selectAlbum = (albumName) => ({
@@ -229,9 +222,34 @@ const addNewAlbum = (albumName) => (dispatch) => {
   dispatch(selectAlbum(albumName));
 };
 
+const getCategoryContent = (categoryName) => async (dispatch) => {
+  const albumNames = await downloadFolders(categoryName);
+  const albums = await Promise.all(
+    albumNames.map(async (name) => {
+      const urlList = await downloadFiles(`${categoryName}/${name}`);
+      return {
+        name,
+        type: categoryName,
+        urlList,
+      };
+    })
+  );
+
+  dispatch(
+    initAlbums([
+      {
+        name: DEFAULT_ALBUM_NAME,
+        type: categoryName,
+      },
+      ...albums,
+    ])
+  );
+};
+
 const changeCategory = (categoryName) => (dispatch) => {
   dispatch(selectCategory(categoryName));
   dispatch(selectAlbum(DEFAULT_ALBUM_NAME));
+  dispatch(getCategoryContent(categoryName));
 };
 
 const editAlbumName = (currName, newName) => (dispatch) => dispatch(renameAlbum(currName, newName));

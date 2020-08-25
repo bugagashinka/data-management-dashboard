@@ -4,62 +4,37 @@ import { useWindowSize } from "utils";
 import { resize } from "business-logic/uiState";
 import { connect } from "react-redux";
 
-const MainContent = ({ thumbsPerRow, resize }) => {
+const MainContent = ({ albums = [], thumbsPerRow, resize }) => {
   const [windowWidth, windowHeight] = useWindowSize();
-
   useEffect(() => {
     resize([windowWidth, windowHeight]);
   }, [windowWidth]);
 
-  return (
-    <section className="content">
-      <article className="album">
+  const albumElements = albums.map((album) => {
+    const thumbElements = album.urlList.map((thumbUrl, index) => (
+      <Thumb key={index} url={thumbUrl} className={`thumb-col-${thumbsPerRow}`} />
+    ));
+    return (
+      <article className="album" key={album.name}>
         <header className="album__header">
-          <h3 className="title album-title">Subcarpathia 2016</h3>
-          <span className="album__stats">(8 photos)</span>
+          <h3 className="title album-title">{album.name}</h3>
+          <span className="album__stats">{`(${album.urlList.length} photos)`}</span>
         </header>
-        <ul className="album__list">
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-        </ul>
+        <ul className="album__list">{thumbElements}</ul>
       </article>
-      <article className="album">
-        <header className="album__header">
-          <h3 className="title album-title">Summer 2015</h3>
-          <span className="album__stats">(16 photos)</span>
-        </header>
-        <ul className="album__list">
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-        </ul>
-      </article>
-      <article className="album">
-        <header className="album__header">
-          <h3 className="title album-title">Subcarpathia 2016</h3>
-          <span className="album__stats">(8 photos)</span>
-        </header>
-        <ul className="album__list">
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-          <Thumb className={`thumb-col-${thumbsPerRow}`} />
-        </ul>
-      </article>
-    </section>
-  );
+    );
+  });
+
+  return <section className="content">{albumElements}</section>;
 };
 
-const stateToProps = ({ uiState }) => ({
+const stateToProps = ({ logicState, uiState }) => ({
+  albums: logicState.albums[logicState.currCategory].filter((album) => {
+    const isCurrentAlbum = album.name === logicState.currAlbum;
+    const isNotDefaultAlbum = album.name !== "All";
+    const isCurrentDefault = logicState.currAlbum === "All";
+    return (isCurrentAlbum && isNotDefaultAlbum) || (isCurrentDefault && isNotDefaultAlbum);
+  }),
   thumbsPerRow: uiState.thumbsPerRow,
 });
 
